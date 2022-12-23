@@ -20,24 +20,30 @@ namespace SolveSudoku
             this.Width = 850;
             this.Height = 850;
         }
+        
+         /// <summary>
+        /// Function Solve Board
+        /// </summary>
+        /// <param name="board"> '.' - Consider empty </param>
+        /// <returns> true or false if its Work</returns>
         static bool SolveSudoku(char[,] board)
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
                 for (int j = 0; j < board.GetLength(1); j++)
                 {
-                    if (board[i, j] == '.')
+                    if (board[i, j] == '.') // If the place is Empty
                     {
                         for (char c = '1'; c <= '9'; c++)
                         {
-                            if (isValid(board, i, j, c))
+                            if (isValid(board, i, j, c)) // Check If its Valid To Add Char
                             {
                                 board[i, j] = c;
                                 if (SolveSudoku(board))
                                 {
                                     return true;
                                 }
-                                else
+                                else // If the function run trough all loop and didnt find its set to '.' and change the previous
                                 {
                                     board[i, j] = '.';
                                 }
@@ -54,16 +60,19 @@ namespace SolveSudoku
         {
             for (int i = 0; i < board.GetLength(0); i++)
             {
+                // Check Row
                 if (board[i, col] != '.' && board[i, col] == ch)
                 {
                     return false;
                 }
+                // Check column
                 if (board[row, i] != '.' && board[row, i] == ch)
                 {
                     return false;
                 }
                 //             startRow + i until lastBox   startCol +       i change every 3
                 char num = board[3 * (row / 3) + i / 3, 3 * (col / 3) + i % 3];
+                // Check 3x3 box
                 if (num != '.' && num == ch)
                 {
                     return false;
