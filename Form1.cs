@@ -157,7 +157,7 @@ namespace SolveSudoku
             }
         }
 
-        private void SudukoForm_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             DesignBoard(startPointX, startPointY);
         }
